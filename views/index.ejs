@@ -1,0 +1,31 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+textarea{
+	resize:none;
+}
+</style>
+
+</head>
+<title>Message Board</title>
+<body>
+	<pre>
+	<%= messages %>
+<form action='/message' method='post'>
+	<label>Name<input type='text' name='msg_name' size='40'required></label>
+	<label>Message<textarea name='msg_txt' cols='100' rows='7' required></textarea></label>
+	<% var tdate = new Date();%>
+	<input type='hidden' value="<%= tdate %>" name='msg_date'>
+	<button type='submit' value='Submit'>Post Message</button>
+</form>
+
+<% for(x in messages){%>
+<p>test</p>
+
+
+
+
+<%}%>
+</body>
+</html>
