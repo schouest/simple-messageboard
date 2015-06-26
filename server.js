@@ -16,7 +16,14 @@ app.get('/', function(req, res) {
  
  Message.find({}, function(err, messages) {
   if (err) {return console.error(err);}
-      res.render('index', {messages: messages});
+  
+      Comment.find({}, function(err, comments) {
+        if (err) {return console.error(err);}
+        
+              res.render('index', {messages:messages, comments:comments});
+        })
+
+
   })
 })
 
@@ -57,7 +64,7 @@ var CommentSchema = new mongoose.Schema({
 com_name: String,
 com_txt: String,
 com_date: Date,
-msg_num: Number
+msg_num: String
 })
 var Comment = mongoose.model('Comment', CommentSchema);
 

@@ -11,13 +11,16 @@ h1{
 .message{
 	border-bottom: 1px solid black;
 }
+.div{
+	
+}
+
 </style>
 
 </head>
 <title>Message Board</title>
 <body>
 <h1>Dojo Message Board</h1>
-	<pre>
 <form action='/message' method='post'>
 	<label>Name<input type='text' name='msg_name' size='40'required></label>
 	<label>Message<textarea name='msg_txt' cols='100' rows='7' required></textarea></label>
@@ -31,6 +34,13 @@ h1{
 <h2>Name: <%= messages[x].msg_name %></h2>
 <h2>Message: <%= messages[x].msg_txt %></h2>
 
+<% for(y in comments){
+	if(messages[x]._id == comments[y].msg_num){%>
+	<div class='comment'>
+<p>Name: <%= comments[y].com_name %></p>
+<p>Comment: <%= comments[y].com_txt %></p>
+</div>
+<%}}%>
 <form action='/comment' method='post'>
 	<label>Name<input type='text' name='com_name' size='40'required></label>
 	<label>Comment<textarea name='com_txt' cols='100' rows='4' required></textarea></label>
