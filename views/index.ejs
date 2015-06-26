@@ -5,13 +5,19 @@
 textarea{
 	resize:none;
 }
+h1{
+	border-bottom: 1px solid black;
+}
+.message{
+	border-bottom: 1px solid black;
+}
 </style>
 
 </head>
 <title>Message Board</title>
 <body>
+<h1>Dojo Message Board</h1>
 	<pre>
-	<%= messages %>
 <form action='/message' method='post'>
 	<label>Name<input type='text' name='msg_name' size='40'required></label>
 	<label>Message<textarea name='msg_txt' cols='100' rows='7' required></textarea></label>
@@ -21,11 +27,19 @@ textarea{
 </form>
 
 <% for(x in messages){%>
-<p>test</p>
+<div class='message'>
+<h2>Name: <%= messages[x].msg_name %></h2>
+<h2>Message: <%= messages[x].msg_txt %></h2>
 
+<form action='/comment' method='post'>
+	<label>Name<input type='text' name='com_name' size='40'required></label>
+	<label>Comment<textarea name='com_txt' cols='100' rows='4' required></textarea></label>
+	<input type='hidden' value="<%= tdate %>" name='com_date'>
+	<input type='hidden' value="<%= messages[x]._id %>" name='msg_num'>
+	<button type='submit' value='Submit'>Post Comment</button>
+</form>
 
-
-
+</div>
 <%}%>
 </body>
 </html>

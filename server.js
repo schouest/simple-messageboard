@@ -1,3 +1,5 @@
+//TODO: calc date on server.js; fix comment not having msg id; display comments
+
 var path = require("path");
 var express = require("express");
 var app = express();
@@ -14,38 +16,35 @@ app.get('/', function(req, res) {
  
  Message.find({}, function(err, messages) {
   if (err) {return console.error(err);}
-   
-   console.log(messages); 
-   res.render('index', {messages: messages});
+      res.render('index', {messages: messages});
   })
 })
 
 
 app.post('/message', function(req, res) {
    var msg = new Message(req.body);
-  console.log('POST: ', req.body)
-  console.log("process: ", msg)
   msg.save(function(err) {
     if(err) {
       console.log('something went wrong');
-    } else { // else console.log that we did well and then redirect to the root route
+    } else {
       console.log('successfully added');
     }
   })
  res.redirect('/');
 })
 
-/*app.post('/comic', function(req, res) {
-   var comic = new Comic({name: req.body.sname, publisher: req.body.pub, init_date: req.body.inidate, description: req.body.desc});
-  comic.save(function(err) {
+app.post('/comment', function(req, res) {
+   var comment = new Comment(req.body);
+   console.log(comment);
+  comment.save(function(err) {
     if(err) {
       console.log('something went wrong');
-    } else { // else console.log that we did well and then redirect to the root route
+    } else {
       console.log('successfully added');
     }
   })
  res.redirect('/');
-})*/
+})
 
 var MessageSchema = new mongoose.Schema({
 msg_name: String,
@@ -55,10 +54,10 @@ msg_date: Date
 var Message = mongoose.model('Message', MessageSchema);
 
 var CommentSchema = new mongoose.Schema({
-comment_name: String,
-comment_txt: String,
-comment_date: Date,
-msg_id: Number
+com_name: String,
+com_txt: String,
+com_date: Date,
+msg_num: Number
 })
 var Comment = mongoose.model('Comment', CommentSchema);
 
