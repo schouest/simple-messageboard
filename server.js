@@ -1,5 +1,3 @@
-//TODO: calc date on server.js; fix comment not having msg id; display comments
-
 var path = require("path");
 var express = require("express");
 var app = express();
@@ -22,34 +20,34 @@ app.get('/', function(req, res) {
         
               res.render('index', {messages:messages, comments:comments});
         })
-
-
   })
 })
 
 
 app.post('/message', function(req, res) {
    var msg = new Message(req.body);
-  msg.save(function(err) {
-    if(err) {
-      console.log('something went wrong');
-    } else {
-      console.log('successfully added');
-    }
-  })
+
+    if(msg.msg_name.length > 3){
+      msg.save(function(err) {
+        if(err) {
+          console.log('something went wrong');
+        } else {
+          console.log('successfully added');
+        }
+      })}
  res.redirect('/');
 })
 
 app.post('/comment', function(req, res) {
    var comment = new Comment(req.body);
-   console.log(comment);
-  comment.save(function(err) {
-    if(err) {
-      console.log('something went wrong');
-    } else {
-      console.log('successfully added');
-    }
-  })
+  if(comment.com_name.length > 3){
+      comment.save(function(err) {
+        if(err) {
+          console.log('something went wrong');
+        } else {
+          console.log('successfully added');
+        }
+      })}
  res.redirect('/');
 })
 

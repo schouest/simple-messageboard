@@ -1,6 +1,5 @@
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <style>
 textarea{
 	resize:none;
@@ -21,8 +20,9 @@ h1{
 <title>Message Board</title>
 <body>
 <h1>Dojo Message Board</h1>
+<p></p>
 <form action='/message' method='post'>
-	<label>Name<input type='text' name='msg_name' size='40'required></label>
+	<label>Name<input type='text' name='msg_name' size='40' required></label>
 	<label>Message<textarea name='msg_txt' cols='100' rows='7' required></textarea></label>
 	<% var tdate = new Date();%>
 	<input type='hidden' value="<%= tdate %>" name='msg_date'>
@@ -43,7 +43,7 @@ h1{
 <%}}%>
 <form action='/comment' method='post'>
 	<label>Name<input type='text' name='com_name' size='40'required></label>
-	<label>Comment<textarea name='com_txt' cols='100' rows='4' required></textarea></label>
+	<label>Comment<textarea name='com_txt' cols='80' rows='4' required></textarea></label>
 	<input type='hidden' value="<%= tdate %>" name='com_date'>
 	<input type='hidden' value="<%= messages[x]._id %>" name='msg_num'>
 	<button type='submit' value='Submit'>Post Comment</button>
